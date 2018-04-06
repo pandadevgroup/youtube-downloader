@@ -12,14 +12,18 @@
 		<h1>Simple Youtube Downloader</h1>
 		<p>Built by Nathan Wang and Jeffrey Meng</p>
 		<hr>
-		<label for="url">Video URL:</label>
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="url-addon">https://www.youtube.com/watch?v=</span>
+
+		<form id="getInfoForm">
+			<label for="url">Video URL:</label>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="url-addon">https://www.youtube.com/watch?v=</span>
+				</div>
+				<input type="text" class="form-control" id="url" aria-describedby="url-addon">
 			</div>
-			<input type="text" class="form-control" id="url" aria-describedby="url-addon">
-		</div>
-		<button class="btn btn-primary btn-block">Download</button>
+		
+			<button class="btn btn-primary btn-block" type="submit">Download</button>
+		</form>
 
 	</div>
 

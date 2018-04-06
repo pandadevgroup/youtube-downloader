@@ -1,14 +1,8 @@
 (function($) {
-	var videoInfo;
-	var selectedEncoding = "H.264";
-
 	$(document).ready(function() {
 		// TODO:
 		// Add a form with Youtube URL. On submit, 
 		// call onUrlEnter() with the video id (eg. "cyW2ajAVyfA")
-
-		// Just for testing
-		onUrlEnter("cyW2ajAVyfA");
 
 		var videoURLRegex = new RegExp("^(?:https?)?:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+)$");
 		$("#url").keyup(function() {
@@ -18,16 +12,28 @@
 				$("#url").val(testResults[1]);
 			}
 		});
+
+		$("#getInfoForm").submit(function(e) {
+			e.preventDefault();
+			var url = $("#url").val();
+
+			getVideoInfo(url, function(videoInfo) {
+				displayInfo(videoInfo);
+			}, function(error) {
+				console.error("Failed to fetch video info. Is the provided video URL correct?");
+			});
+		});
 	});
 	
-	function onUrlEnter(videoID) {
+	function getVideoInfo(videoID, success, error) {
 		$.get("/api/getInfo/" + videoID, function(data) {
-			videoInfo = parseInfo(data);
-			displayInfo(videoInfo);
-		});
+			var videoInfo = parseInfo(data);
+			success(videoInfo);
+		}).fail(error);
 	}
 
 	function parseInfo(data) {
+		var selectedEncoding = "H.264";
 		return {
 			thumbnailUrl: "https://i.ytimg.com/vi/" + data.video_id + "/maxresdefault.jpg",
 			title: data.title,
