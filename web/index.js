@@ -126,8 +126,11 @@
 			$(".videodata-" + attrs[i]).text(videoInfo[attrs[i]]);
 		}
 		for (var formatName in videoInfo.formats) {
-			$(".videodata-formats").append(
-				"<p><a href='" + videoInfo.formats[formatName].url + "' target='_blank'>" + formatName + "</a></p>"
+			$(".container").append(
+				"<p><a href='" + videoInfo.formats[formatName].url + 
+					"' download='" + videoInfo.title + "' target='_blank'>" +
+					formatName + 
+				"</a></p>"
 			);
 		}
 		$(".src-thumbnailUrl").attr("src", videoInfo.thumbnailUrl);
