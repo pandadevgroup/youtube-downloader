@@ -17,10 +17,14 @@
 			e.preventDefault();
 			var url = $("#url").val();
 
+			showLoading();
+
 			getVideoInfo(url, function(videoInfo) {
+				hideLoading();
 				displayInfo(videoInfo);
 			}, function(error) {
-				console.error("Failed to fetch video info. Is the provided video URL correct?");
+				hideLoading();
+				displayError("Failed to fetch video info. Is the provided video URL correct?");
 			});
 		});
 	});
@@ -73,6 +77,21 @@
 			if (formats[i].itag === tag) return formats[i];
 		}
 		return null;
+	}
+
+	function showLoading() {
+		// TODO: Show loading indicator (request to server is being made).
+		console.log("Showing loading indicator");
+	}
+
+	function hideLoading() {
+		// TODO: Hide loading indicator (request finished).
+		console.log("Hiding loading indicator");
+	}
+
+	function displayError(error) {
+		// TODO: Display given error message (string).
+		console.error("An error occurred:", error);
 	}
 
 	function displayInfo(videoInfo) {
