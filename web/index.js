@@ -1,17 +1,10 @@
 (function($) {
-	var videoInfo;
-	var selectedEncoding = "H.264";
-
 	$(document).ready(function() {
 		// TODO:
 		// Add a form with Youtube URL. On submit,
 		// call onUrlEnter() with the video id (eg. "cyW2ajAVyfA")
 
 		// Just for testing
-<<<<<<< HEAD
-=======
-		onUrlEnter("cyW2ajAVyfA");
->>>>>>> f314b81dc0c8538b217fc68b63ebde47e4dfc5ec
 
 		var videoURLRegex = new RegExp(
 			"^(?:https?)?:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+)$"
@@ -23,18 +16,29 @@
 				$("#url").val(testResults[1]);
 			}
 		});
-		$("#download").click(function() {
-			//TODO: make keyup
+
+		$("#getInfoForm").submit(function(e) {
+			e.preventDefault();
 			var url = $("#url").val();
-			onUrlEnter(url);
+
+			getVideoInfo(
+				url,
+				function(videoInfo) {
+					displayInfo(videoInfo);
+				},
+				function(error) {
+					$(".alert-1").remove();
+					$("#alert-box").append(getAlert("danger", "Failed to fetch video info. Is the provided video URL correct?", "Error:", 1));
+				}
+			);
 		});
 	});
-	
-	function onUrlEnter(videoID) {
+
+	function getVideoInfo(videoID, success, error) {
 		$.get("/api/getInfo/" + videoID, function(data) {
-			videoInfo = parseInfo(data);
-			displayInfo(videoInfo);
-		});
+			var videoInfo = parseInfo(data);
+			success(videoInfo);
+		}).fail(error);
 	}
 
 	function parseInfo(data) {
@@ -102,10 +106,17 @@
 		];
 		for (i = 0; i < attrs.length; i++) {
 			$(".videodata-" + attrs[i]).text(videoInfo[attrs[i]]);
-			
 		}
 		$(".src-thumbnailUrl").attr("src", videoInfo.thumbnailUrl);
 		$(".href-thumbnailUrl").attr("href", videoInfo.thumbnailUrl);
 		$(".href-video_url").attr("href", videoInfo.video_url);
+	}
+	function getAlert(type, message, title, id) {
+		return `<div class="alert alert-${type} alert-dismissible fade show alert-${id}" role="alert">
+		<strong>${title == null ? "" : title}</strong> ${message}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+	  </div>`;
 	}
 })(jQuery);
