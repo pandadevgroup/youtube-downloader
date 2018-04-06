@@ -94,14 +94,11 @@
 	}
 
 	function showLoading() {
-		// TODO: Show loading indicator (request to server is being made).
-		
 		$("#download").text("Loading...");
 		$("#download").attr("disabled", "disabled");
 	}
 
 	function hideLoading() {
-		// TODO: Hide loading indicator (request finished).
 		$("#download").text("Download");
 		$("#download").removeAttr("disabled", "disabled");
 	}
