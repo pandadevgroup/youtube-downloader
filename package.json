@@ -8,6 +8,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "express": "^4.16.3",
     "ytdl-core": "^0.20.2"
   }
 }

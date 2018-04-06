@@ -1,10 +1,15 @@
-const fs = require('fs');
+const express = require('express')
+const path = require('path')
 const ytdl = require('ytdl-core');
+const PORT = process.env.PORT || 5000
 
-ytdl.getInfo("https://www.youtube.com/watch?v=HGdwNVZfWeg", (err, info) => {
-	if (err) throw err;
-	var audio = ytdl.chooseFormat(info.formats, { quality: "highestaudio" });
-	var highest = ytdl.chooseFormat(info.formats, { quality: "highest" });
-	var lowest = ytdl.chooseFormat(info.formats, { quality: "lowest" });
-	console.log(audio, highest, lowest);
-});
+express()
+	.use(express.static(path.join(__dirname, 'web')))
+	.get('/', (req, res) => res.sendFile(path.join(__dirname, "web", "index.html")))
+	.get("/api/getInfo/:id", (req, res) => {
+		ytdl.getInfo(`https://www.youtube.com/watch?v=${req.params.id}`, (err, info) => {
+			if (err) return res.status(500).send(err);
+			res.send(info);
+		});
+	})
+	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
