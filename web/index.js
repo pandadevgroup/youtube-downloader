@@ -97,5 +97,11 @@
 	function displayInfo(videoInfo) {
 		// TODO: videoInfo is what parseInfo() returns
 		console.log(videoInfo);
+
+		for (var formatName in videoInfo.formats) {
+			$(".container").append(
+				"<p><a href='" + videoInfo.formats[formatName].url + "' target='_blank'>" + formatName + "</a></p>"
+			);
+		}
 	}
 })(jQuery);
