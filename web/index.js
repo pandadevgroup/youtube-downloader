@@ -45,12 +45,8 @@
 	}
 
 	function parseInfo(data) {
-		data.thumbnailUrl = "https://i.ytimg.com/vi/" + data.video_id + "/maxresdefault.jpg";
-		data.formats = parseFormats(data.formats);
-		return data;
-		/*
-		Officially supported params:
-		{
+		var selectedEncoding = "H.264";
+		return {
 			thumbnailUrl: "https://i.ytimg.com/vi/" + data.video_id + "/maxresdefault.jpg",
 			title: data.title,
 			video_id: data.video_id,
@@ -61,8 +57,6 @@
 			description: data.description,
 			video_url: data.video_url
 		};
-		
-		*/
 	}
 
 	function parseFormats(fmt_list, formats, selectedEncoding) {
