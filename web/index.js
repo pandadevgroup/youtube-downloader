@@ -1,5 +1,6 @@
 (function($) {
 	var videoInfo;
+	var selectedEncoding = "H.264";
 
 	$(document).ready(function() {
 		// TODO:
@@ -18,6 +19,7 @@
 			}
 		});
 	});
+	
 	function onUrlEnter(videoID) {
 		$.get("/api/getInfo/" + videoID, function(data) {
 			videoInfo = parseInfo(data);
@@ -32,15 +34,14 @@
 			video_id: data.video_id,
 			length_seconds: data.length_seconds,
 			author: data.author,
-			formats: parseFormats(data.fmt_list, data.formats),
+			formats: parseFormats(data.fmt_list, data.formats, selectedEncoding),
 			published: data.published,
 			description: data.description,
 			video_url: data.video_url
 		};
 	}
 
-	function parseFormats(fmt_list, formats) {
-		console.log(fmt_list, formats);
+	function parseFormats(fmt_list, formats, selectedEncoding) {
 		var parsed = {};
 		var resolutionToNameMap = {
 			"176x144": "Very Low Quality (144p)",
@@ -51,9 +52,12 @@
 		for (var i = 0; i < fmt_list.length; i++) {
 			var tag = fmt_list[i][0];
 			var resolution = fmt_list[i][1];
+			var format = getFormatFromTag(tag, formats);
+			if (!format || format.encoding !== selectedEncoding) continue;
+
 			var name = resolutionToNameMap[resolution] || "Unknown (" + resolution + ")";
-			console.log(getFormatFromTag(tag, formats));
-			parsed[name] = tag;
+
+			parsed[name] = format;
 		}
 		return parsed;
 	}
