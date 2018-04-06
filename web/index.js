@@ -128,6 +128,11 @@
 		for (i = 0; i < attrs.length; i++) {
 			$(".videodata-" + attrs[i]).text(videoInfo[attrs[i]]);
 		}
+		for (var formatName in videoInfo.formats) {
+			$(".videodata-formats").append(
+				"<p><a href='" + videoInfo.formats[formatName].url + "' target='_blank'>" + formatName + "</a></p>"
+			);
+		}
 		$(".src-thumbnailUrl").attr("src", videoInfo.thumbnailUrl);
 		$(".href-thumbnailUrl").attr("href", videoInfo.thumbnailUrl);
 		$(".href-video_url").attr("href", videoInfo.video_url);
