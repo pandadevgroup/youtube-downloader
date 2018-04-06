@@ -1,12 +1,17 @@
 (function($) {
-	$(document).ready(function() {
-		let videoInfo;
+	var videoInfo;
+	var selectedEncoding = "H.264";
 
+	$(document).ready(function() {
 		// TODO:
 		// Add a form with Youtube URL. On submit,
 		// call onUrlEnter() with the video id (eg. "cyW2ajAVyfA")
 
 		// Just for testing
+<<<<<<< HEAD
+=======
+		onUrlEnter("cyW2ajAVyfA");
+>>>>>>> f314b81dc0c8538b217fc68b63ebde47e4dfc5ec
 
 		var videoURLRegex = new RegExp(
 			"^(?:https?)?:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+)$"
@@ -24,6 +29,7 @@
 			onUrlEnter(url);
 		});
 	});
+	
 	function onUrlEnter(videoID) {
 		$.get("/api/getInfo/" + videoID, function(data) {
 			videoInfo = parseInfo(data);
@@ -43,7 +49,7 @@
 			video_id: data.video_id,
 			length_seconds: data.length_seconds,
 			author: data.author,
-			formats: parseFormats(data.formats),
+			formats: parseFormats(data.fmt_list, data.formats, selectedEncoding),
 			published: data.published,
 			description: data.description,
 			video_url: data.video_url
@@ -52,8 +58,32 @@
 		*/
 	}
 
-	function parseFormats(formats) {
-		return {};
+	function parseFormats(fmt_list, formats, selectedEncoding) {
+		var parsed = {};
+		var resolutionToNameMap = {
+			"176x144": "Very Low Quality (144p)",
+			"320x180": "Low Quality (180p)",
+			"640x360": "Medium Quality (360p)",
+			"1280x720": "High Quality (720p)"
+		};
+		for (var i = 0; i < fmt_list.length; i++) {
+			var tag = fmt_list[i][0];
+			var resolution = fmt_list[i][1];
+			var format = getFormatFromTag(tag, formats);
+			if (!format || format.encoding !== selectedEncoding) continue;
+
+			var name = resolutionToNameMap[resolution] || "Unknown (" + resolution + ")";
+
+			parsed[name] = format;
+		}
+		return parsed;
+	}
+
+	function getFormatFromTag(tag, formats) {
+		for (var i = 0; i < formats.length; i++) {
+			if (formats[i].itag === tag) return formats[i];
+		}
+		return null;
 	}
 
 	function displayInfo(videoInfo) {
