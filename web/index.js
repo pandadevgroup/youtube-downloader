@@ -21,14 +21,17 @@
 			e.preventDefault();
 			var url = $("#url").val();
 
+			showLoading();
+
 			getVideoInfo(
 				url,
 				function(videoInfo) {
+					hideLoading();
 					displayInfo(videoInfo);
 				},
 				function(error) {
-					$(".alert-1").remove();
-					$("#alert-box").append(getAlert("danger", "Failed to fetch video info. Is the provided video URL correct?", "Error:", 1));
+					hideLoading();
+					displayError("Failed to fetch video info. Is the provided video URL correct?", "Error:", 1);
 				}
 			);
 		});
@@ -88,6 +91,24 @@
 			if (formats[i].itag === tag) return formats[i];
 		}
 		return null;
+	}
+
+	function showLoading() {
+		// TODO: Show loading indicator (request to server is being made).
+		
+		$("#download").text("Loading...");
+		$("#download").attr("disabled", "disabled");
+	}
+
+	function hideLoading() {
+		// TODO: Hide loading indicator (request finished).
+		$("#download").text("Download");
+		$("#download").removeAttr("disabled", "disabled");
+	}
+
+	function displayError(text, title, id) {
+		$(".alert-1").remove();
+		$("#alert-box").append(getAlert("danger", text, title, id));
 	}
 
 	function displayInfo(videoInfo) {
