@@ -1,0 +1,13 @@
+{
+  "name": "youtube-downloader",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "author": "Nathan Wang",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ytdl-core": "^0.20.2"
+  }
+}
