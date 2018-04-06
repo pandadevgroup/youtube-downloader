@@ -71,6 +71,10 @@
 
 			parsed[name] = format;
 		}
+
+		// TEMPORARY AUDIO SOLUTION
+		parsed["Audio Only (m4a)"] = getFormatFromTag("140", formats);
+
 		return parsed;
 	}
 
