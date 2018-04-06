@@ -12,14 +12,18 @@
 		<h1>Simple Youtube Downloader</h1>
 		<p>Built by Nathan Wang and Jeffrey Meng</p>
 		<hr>
-		<label for="url">Video URL:</label>
+		<label for="url">Video URL (tip: pasting in the entire link works too!):</label>
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="url-addon">https://www.youtube.com/watch?v=</span>
 			</div>
 			<input type="text" class="form-control" id="url" aria-describedby="url-addon">
 		</div>
-		<button class="btn btn-primary btn-block">Download</button>
+		<button class="btn btn-primary btn-block" id="download">Download</button>
+		<hr>
+		<h1 class="videodata-title"></h1>
+		<img src="" alt="Video Thumbnail" class="src-thumbnailUrl">
+
 
 	</div>
 
