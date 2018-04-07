@@ -1,11 +1,5 @@
 (function($) {
 	$(document).ready(function() {
-		// TODO:
-		// Add a form with Youtube URL. On submit,
-		// call onUrlEnter() with the video id (eg. "cyW2ajAVyfA")
-
-		// Just for testing
-
 		var videoURLRegex = new RegExp(
 			"^(?:https?)?:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+)$"
 		);
@@ -77,6 +71,10 @@
 
 			parsed[name] = format;
 		}
+
+		// TEMPORARY AUDIO SOLUTION
+		parsed["Audio Only (m4a)"] = getFormatFromTag("140", formats);
+
 		return parsed;
 	}
 
