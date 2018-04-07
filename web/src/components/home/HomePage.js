@@ -1,9 +1,17 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
+import Typography from "material-ui/Typography";
 
 const styles = theme => ({
-  contianer: {
+  container: {
     display: "flex",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: "64px"
+  },
+  title: {
+    fontSize: "2rem"
   },
 });
 
@@ -13,8 +21,9 @@ class HomePage extends React.Component {
 
     return (
       <div className={classes.container}>
-        
-        Home
+        <Typography variant="headline" gutterBottom className={classes.title}>
+          Youtube Downloader
+        </Typography>
       </div>
     );
   }
