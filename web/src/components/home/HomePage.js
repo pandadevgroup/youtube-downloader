@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
 
 const styles = theme => ({
   container: {
@@ -17,10 +18,15 @@ const styles = theme => ({
   },
   searchForm: {
     width: "100%",
-    maxWidth: "40rem"
+    maxWidth: "40rem",
+    display: "flex"
   },
   search: {
-    width: "100%"
+    flex: 1
+  },
+  buttonContainer: {
+    margin: "auto",
+    marginLeft: "1rem"
   }
 });
 
@@ -39,6 +45,16 @@ class HomePage extends React.Component {
             placeholder="Search or paste link here"
             className={classes.search}
             margin="normal" />
+          <div className={classes.buttonContainer}>
+            <Button
+              variant="raised"
+              color="primary"
+              onClick={this.handleButtonClick}
+              style={{ minWidth: "60px" }}
+              type="submit">
+              Go
+            </Button>
+          </div>
         </form>
       </div>
     );
