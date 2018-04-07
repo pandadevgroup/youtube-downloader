@@ -1,13 +1,16 @@
 import React from 'react';
-import Button from "material-ui/Button";
+import HomePage from "./home/HomePage";
+import { Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Button variant="raised" color="primary">
-          Hello World!
-        </Button>
+        <main>
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+          </Switch>
+        </main>
       </div>
     );
   }
