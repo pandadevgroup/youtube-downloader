@@ -5,10 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
-import Button from "material-ui/Button";
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import MenuIcon from 'material-ui-icons/Menu';
-import HomeIcon from "material-ui-icons/Home";
 import { withStyles } from "material-ui/styles";
 
 const styles = theme => ({
