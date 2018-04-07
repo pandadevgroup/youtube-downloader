@@ -1,11 +1,6 @@
 import React from 'react';
 import HomePage from "./home/HomePage";
 import { Route, Switch, Link } from "react-router-dom";
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
 import { withStyles } from "material-ui/styles";
 
 const styles = theme => ({
@@ -30,16 +25,9 @@ class App extends React.Component {
     return (
       <div className={classes.container}>
         <header>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                <MenuIcon/>
-              </IconButton>
-              <Typography variant="title" color="inherit">
-                <Link to="/" className="link-reset">Youtube Downloader</Link>
-              </Typography>
-            </Toolbar>
-          </AppBar>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <Link class="navbar-brand" to="/">Youtube Downloader</Link>
+          </nav>
         </header>
 
         <main className={classes.main}>
