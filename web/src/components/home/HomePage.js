@@ -1,8 +1,5 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
-import TextField from "material-ui/TextField";
-import Button from "material-ui/Button";
 
 const styles = theme => ({
   container: {
@@ -14,7 +11,8 @@ const styles = theme => ({
   },
   title: {
     fontSize: "2rem",
-    marginTop: "4rem"
+    marginTop: "4rem",
+    marginBottom: "1rem"
   },
   searchForm: {
     width: "100%",
@@ -23,10 +21,6 @@ const styles = theme => ({
   },
   search: {
     flex: 1
-  },
-  buttonContainer: {
-    margin: "auto",
-    marginLeft: "1rem"
   }
 });
 
@@ -36,25 +30,16 @@ class HomePage extends React.Component {
 
     return (
       <div className={classes.container}>
-        <Typography variant="headline" gutterBottom className={classes.title}>
+        <h1 className={classes.title}>
           Youtube Downloader
-        </Typography>
+        </h1>
         <form noValidate autoComplete="off" className={classes.searchForm}>
-          <TextField
-            id="name"
-            placeholder="Search or paste link here"
-            className={classes.search}
-            margin="normal" />
-          <div className={classes.buttonContainer}>
-            <Button
-              variant="raised"
-              color="primary"
-              onClick={this.handleButtonClick}
-              style={{ minWidth: "60px" }}
-              type="submit">
-              Go
-            </Button>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search or paste link here" />
           </div>
+          <button class="btn btn-primary" type="submit">
+            Go
+          </button>
         </form>
       </div>
     );
