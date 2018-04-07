@@ -25,6 +25,7 @@ express()
 			res.send(results);
 		});
 	})
+<<<<<<< HEAD
 	.get("/api/download/:id", (req, res) => {
 		console.log("downloading");
 		ytdlHelper.download(req.params.id).then(download => {
@@ -32,3 +33,6 @@ express()
 		});
 	})
 	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+=======
+	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+>>>>>>> 8c3e93567b07bf89b3f05a2225cdcc297f6fb834
