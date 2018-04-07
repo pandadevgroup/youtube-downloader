@@ -1,7 +1,7 @@
 import React from "react";
 import injectSheet from 'react-jss'
 import * as YoutubeService from "../../services/youtube.service";
-import {DebounceInput} from 'react-debounce-input';
+import Search from "../search/Search";
 
 const styles = {
   container: {
@@ -15,13 +15,6 @@ const styles = {
     fontSize: "2rem",
     marginTop: "4rem",
     marginBottom: "1rem"
-  },
-  searchForm: {
-    width: "100%",
-    maxWidth: "40rem"
-  },
-  submit: {
-    border: "1px solid #ced4da"
   }
 };
 
@@ -37,8 +30,7 @@ class HomePage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    let search = event.target.value;
+  handleChange(search) {
     this.setState({ search });
 
 		let videoURLRegex = new RegExp(
@@ -55,8 +47,8 @@ class HomePage extends React.Component {
       .catch(err => console.error(err));
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(search) {
+    
   }
 
   render() {
@@ -67,21 +59,7 @@ class HomePage extends React.Component {
         <h1 className={classes.title}>
           Youtube Downloader
         </h1>
-        <form noValidate autoComplete="off" className={classes.searchForm}>
-          <div className="input-group">
-            <DebounceInput
-              minLength={2}
-              debounceTimeout={300}
-              type="text"
-              className="form-control"
-              value={this.state.search}
-              onChange={this.handleChange}
-              placeholder="Search or paste link here" />
-            <div className="input-group-append">
-              <button className={`btn btn-outline-primary ${classes.submit}`} type="submit">Go</button>
-            </div>
-          </div>
-        </form>
+        <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
       </div>
     );
   }
