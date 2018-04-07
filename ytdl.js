@@ -3,16 +3,15 @@ const ytdl = require('ytdl-core');
 const fs = require("fs");
 
 module.exports = {
-	download(videoId) {
+	download(videoId, quality) {
 		const url = `https://www.youtube.com/watch?v=${videoId}`;
-		const output = path.resolve(__dirname, "downloads", `${videoId}.mp4`);
+		const output = path.resolve(__dirname, "downloads", `${videoId}_${Date.now()}.mp4`);
 		return new Promise((resolve, reject) => {
-			ytdl(url, { quality: "highest" })
-				// Write audio to file since ffmpeg supports only one input stream.
+			ytdl(url, { quality })
+				.on("error", (e) => reject(e))
 				.pipe(fs.createWriteStream(output))
 				.on('finish', () => {
 					resolve(output);
-					console.log("Done downloading");
 				});
 		});
 	}

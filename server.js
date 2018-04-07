@@ -25,14 +25,14 @@ express()
 			res.send(results);
 		});
 	})
-<<<<<<< HEAD
 	.get("/api/download/:id", (req, res) => {
-		console.log("downloading");
-		ytdlHelper.download(req.params.id).then(download => {
+		ytdlHelper.download(req.params.id, "highest").then(download => {
 			res.sendFile(download)
-		});
+		}).catch(e => res.status(500).send(e.message));
+	})
+	.get("/api/download/:id/:itag", (req, res) => {
+		ytdlHelper.download(req.params.id, req.params.itag).then(download => {
+			res.sendFile(download)
+		}).catch(e => res.status(500).send(e.message));
 	})
 	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
-=======
-	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
->>>>>>> 8c3e93567b07bf89b3f05a2225cdcc297f6fb834

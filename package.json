@@ -5,7 +5,8 @@
   "license": "MIT",
   "author": "Nathan Wang",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "clean": "rm downloads/*.mp4"
   },
   "dependencies": {
     "express": "^4.16.3",
