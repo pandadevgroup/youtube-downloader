@@ -8,7 +8,25 @@
 			var testResults = videoURLRegex.exec(url);
 			if (testResults != null) {
 				$("#url").val(testResults[1]);
+				url = testResults[1];
 			}
+			
+			$("#url").removeClass("is-invalid");
+			$("#url").removeClass("is-valid");
+			if (url == "") {
+				return;
+			}
+			getVideoInfo(
+				url,
+				function(videoInfo) {
+					//$("#url").removeClass("is-invalid");
+					$("#url").addClass("is-valid");
+				},
+				function(error) {
+					//$("#url").removeClass("is-valid");
+					$("#url").addClass("is-invalid");
+				}
+			);
 		});
 
 		$("#getInfoForm").submit(function(e) {
@@ -29,6 +47,7 @@
 				}
 			);
 		});
+
 	});
 
 	function getVideoInfo(videoID, success, error) {
