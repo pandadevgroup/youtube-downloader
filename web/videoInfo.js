@@ -119,8 +119,8 @@
 		}
 		for (var formatName in videoInfo.formats) {
 			$(".container").append(
-				"<p><a href='" +
-					videoInfo.formats[formatName].url +
+				"<p><a href='/api/download/" + videoInfo.video_id + "/" +
+					videoInfo.formats[formatName].itag +
 					"' download='" +
 					videoInfo.title +
 					"' target='_blank'>" +
