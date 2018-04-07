@@ -12,12 +12,17 @@ import HomeIcon from "material-ui-icons/Home";
 import { withStyles } from "material-ui/styles";
 
 const styles = theme => ({
-  contianer: {
+  container: {
     display: "flex",
+    height: "100vh",
+    flexDirection: "column"
   },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+  },
+  main: {
+    flex: 1,
   },
 });
 
@@ -40,7 +45,7 @@ class App extends React.Component {
           </AppBar>
         </header>
 
-        <main>
+        <main className={classes.main}>
           <Switch>
             <Route path="/" exact component={HomePage} />
           </Switch>
