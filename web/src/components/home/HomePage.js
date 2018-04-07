@@ -22,17 +22,11 @@ class HomePage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      search: ""
-    };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(search) {
-    this.setState({ search });
-
 		let videoURLRegex = new RegExp(
 			"^(?:https?)?:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+)$"
 		);
@@ -59,7 +53,7 @@ class HomePage extends React.Component {
         <h1 className={classes.title}>
           Youtube Downloader
         </h1>
-        <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <Search onChange={this.handleChange} onSubmit={this.handleSubmit}/>
       </div>
     );
   }

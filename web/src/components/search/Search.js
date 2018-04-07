@@ -25,6 +25,7 @@ class Search extends React.Component {
   }
 
   handleChange(event) {
+    this.setState({ search: event.target.value });
     this.props.onChange(event.target.value);
   }
 
@@ -35,13 +36,13 @@ class Search extends React.Component {
 
   render() {
     const { classes } = this.props;
-    
+
     return (
       <form noValidate autoComplete="off" className={classes.searchForm} onSubmit={this.handleSubmit}>
         <div className="input-group">
           <DebounceInput
             minLength={2}
-            debounceTimeout={300}
+            debounceTimeout={150}
             type="text"
             className="form-control"
             value={this.state.search}
