@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const ytdl = require('ytdl-core');
 const ytSearch = require("youtube-search");
-const ytdlHelper = require("./ytdl");
 const PORT = process.env.PORT || 5000
 
 var searchOpts = {
@@ -23,12 +22,6 @@ express()
 		ytSearch(req.params.query, searchOpts, (err, results) => {
 			if (err) return res.status(500).send(err);
 			res.send(results);
-		});
-	})
-	.get("/api/download/:id", (req, res) => {
-		console.log("downloading");
-		ytdlHelper.download(req.params.id).then(download => {
-			res.sendFile(download)
 		});
 	})
 	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
