@@ -149,10 +149,10 @@
 
 	function getAlert(type, message, title, id) {
 		return `<div class="alert alert-${type} alert-dismissible fade show alert-${id}" role="alert">
-		<strong>${title == null ? "" : title}</strong> ${message}
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-	  </button>
-	  </div>`;
+			<strong>${title == null ? "" : title}</strong> ${message}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>`;
 	}
 })(jQuery);
