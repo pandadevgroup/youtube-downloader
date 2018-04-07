@@ -25,8 +25,8 @@ class App extends React.Component {
     return (
       <div className={classes.container}>
         <header>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <Link class="navbar-brand" to="/">Youtube Downloader</Link>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <Link className="navbar-brand" to="/">Youtube Downloader</Link>
           </nav>
         </header>
 

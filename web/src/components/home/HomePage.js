@@ -16,11 +16,10 @@ const styles = {
   },
   searchForm: {
     width: "100%",
-    maxWidth: "40rem",
-    display: "flex"
+    maxWidth: "40rem"
   },
-  search: {
-    flex: 1
+  submit: {
+    border: "1px solid #ced4da"
   }
 };
 
@@ -34,12 +33,14 @@ class HomePage extends React.Component {
           Youtube Downloader
         </h1>
         <form noValidate autoComplete="off" className={classes.searchForm}>
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search or paste link here" />
+          <div className="input-group">
+            <input type="text"
+              className="form-control"
+              placeholder="Search or paste link here" />
+            <div className="input-group-append">
+              <button className={`btn btn-outline-primary ${classes.submit}`} type="submit">Go</button>
+            </div>
           </div>
-          <button class="btn btn-primary" type="submit">
-            Go
-          </button>
         </form>
       </div>
     );
