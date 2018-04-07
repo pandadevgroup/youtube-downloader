@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from 'react-jss'
 import * as YoutubeService from "../../services/youtube.service";
 import Search from "../search/Search";
+import VideoInfo from "../video-info/VideoInfo";
 
 const styles = {
   container: {
@@ -22,6 +23,10 @@ class HomePage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      videoInfo: null
+    };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -37,7 +42,7 @@ class HomePage extends React.Component {
     if (!videoId) return;
 
     YoutubeService.getVideoInfo(videoId)
-      .then(info => console.log(info))
+      .then(videoInfo => this.setState({ videoInfo }))
       .catch(err => console.error(err));
   }
 
@@ -54,6 +59,7 @@ class HomePage extends React.Component {
           Youtube Downloader
         </h1>
         <Search onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+        {this.state.videoInfo && <VideoInfo info={this.state.videoInfo} />}
       </div>
     );
   }
