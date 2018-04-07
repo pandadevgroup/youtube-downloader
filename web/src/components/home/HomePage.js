@@ -1,16 +1,23 @@
 import React from "react";
-import Button from "material-ui/Button";
+import { withStyles } from "material-ui/styles";
+
+const styles = theme => ({
+  contianer: {
+    display: "flex",
+  },
+});
 
 class HomePage extends React.Component {
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
-        <Button variant="raised" color="primary">
-          Home Page!
-        </Button>
+      <div className={classes.container}>
+        
+        Home
       </div>
     );
   }
 }
 
-export default HomePage;
+export default withStyles(styles)(HomePage);
