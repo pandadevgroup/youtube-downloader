@@ -121,11 +121,25 @@
 		}
 		for (var formatName in videoInfo.formats) {
 			$(".container").append(
-				"<p><a href='" + videoInfo.formats[formatName].url + 
-					"' download='" + videoInfo.title + "' target='_blank'>" +
-					formatName + 
-				"</a></p>"
+				"<p><a href='" +
+					videoInfo.formats[formatName].url +
+					"' download='" +
+					videoInfo.title +
+					"' target='_blank'>" +
+					formatName +
+					"</a></p>"
 			);
+			fetch(videoInfo.formats[formatName].url)
+				.then(res => res.blob()) // Gets the response and returns it as a blob
+				.then(blob => {
+					// Here's where you get access to the blob
+					// And you can use it for whatever you want
+					// Like calling ref().put(blob)
+
+					// Here, I use it to make an image appear on the page
+					let objectURL = URL.createObjectURL(blob);
+					console.log(objectURL);
+				});
 		}
 		$(".src-thumbnailUrl").attr("src", videoInfo.thumbnailUrl);
 		$(".href-thumbnailUrl").attr("href", videoInfo.thumbnailUrl);
