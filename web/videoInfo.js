@@ -73,7 +73,7 @@
 		}
 
 		// TEMPORARY AUDIO SOLUTION
-		parsed["Audio Only (m4a)"] = getFormatFromTag("140", formats);
+		// parsed["Audio Only (m4a)"] = getFormatFromTag("140", formats);
 
 		return parsed;
 	}
@@ -117,8 +117,9 @@
 		for (i = 0; i < attrs.length; i++) {
 			$(".videodata-" + attrs[i]).text(videoInfo[attrs[i]]);
 		}
+		let downloadLinks = [];
 		for (var formatName in videoInfo.formats) {
-			$(".container").append(
+			downloadLinks.push(
 				"<p><a href='/api/download/" + videoInfo.video_id + "/" +
 					videoInfo.formats[formatName].itag +
 					"' download='" +
@@ -142,7 +143,10 @@
 		$(".src-thumbnailUrl").attr("src", videoInfo.thumbnailUrl);
 		$(".href-thumbnailUrl").attr("href", videoInfo.thumbnailUrl);
 		$(".href-video_url").attr("href", videoInfo.video_url);
+
+		$("#videoDownloadLinks").html(downloadLinks.join(""));
 	}
+
 	function getAlert(type, message, title, id) {
 		return `<div class="alert alert-${type} alert-dismissible fade show alert-${id}" role="alert">
 		<strong>${title == null ? "" : title}</strong> ${message}
