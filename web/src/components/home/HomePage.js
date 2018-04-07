@@ -1,7 +1,7 @@
 import React from "react";
-import { withStyles } from "material-ui/styles";
+import injectSheet from 'react-jss'
 
-const styles = theme => ({
+const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
@@ -22,7 +22,7 @@ const styles = theme => ({
   search: {
     flex: 1
   }
-});
+};
 
 class HomePage extends React.Component {  
   render() {
@@ -46,4 +46,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default withStyles(styles)(HomePage);
+export default injectSheet(styles)(HomePage);

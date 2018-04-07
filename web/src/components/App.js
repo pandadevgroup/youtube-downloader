@@ -1,9 +1,9 @@
 import React from 'react';
 import HomePage from "./home/HomePage";
 import { Route, Switch, Link } from "react-router-dom";
-import { withStyles } from "material-ui/styles";
+import injectSheet from 'react-jss'
 
-const styles = theme => ({
+const styles = {
   container: {
     display: "flex",
     height: "100vh",
@@ -16,7 +16,7 @@ const styles = theme => ({
   main: {
     flex: 1,
   },
-});
+};
 
 class App extends React.Component {
   render() {
@@ -40,4 +40,4 @@ class App extends React.Component {
   }
 }
 
-export default withStyles(styles)(App);
+export default injectSheet(styles)(App);
