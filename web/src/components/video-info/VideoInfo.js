@@ -1,6 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
 import { Link } from "react-router-dom";
+import * as Utils from "../../services/utils";
 
 const styles = {
   container: {
@@ -34,7 +35,7 @@ class VideoInfo extends React.Component {
 
     return (
       <div className={classes.container}>
-        <img src={info.thumbnailUrl} className={classes.thumbnail} />
+        <img src={info.thumbnailUrl} className={classes.thumbnail} alt={info.title} />
         <div className={classes.title}>
           <Link to={`/video/${info.video_id}`} className={classes.link}>
             {info.title}
@@ -45,25 +46,9 @@ class VideoInfo extends React.Component {
             {info.author.name}
           </a>
         </div>
-        <div className="text-secondary">Duration: {this.secondsToText(info.length_seconds)}</div>
+        <div className="text-secondary">Duration: {Utils.secondsToText(info.length_seconds)}</div>
       </div>
     );
-  }
-
-  secondsToText(totalSeconds) {
-    function numberEnding (number) {
-      return (number > 1) ? 's' : '';
-    }
-
-    let seconds = totalSeconds % 60;
-    let minutes = ~~(totalSeconds / 60);
-    let hours = ~~(totalSeconds / 3600);
-
-    seconds = seconds > 0 ? `${seconds} second${numberEnding(seconds)}` : "";
-    minutes = minutes > 0 ? `${minutes} minute${numberEnding(minutes)}` : "";
-    hours = hours > 0 ? `${hours} hour${numberEnding(hours)}` : "";
-
-    return `${hours} ${minutes} ${seconds}`;
   }
 }
 

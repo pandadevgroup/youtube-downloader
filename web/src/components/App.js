@@ -1,5 +1,6 @@
 import React from 'react';
 import HomePage from "./home/HomePage";
+import VideoPage from "./video/VideoPage";
 import { Route, Switch, Link } from "react-router-dom";
 import injectSheet from 'react-jss'
 
@@ -33,6 +34,7 @@ class App extends React.Component {
         <main className={classes.main}>
           <Switch>
             <Route path="/" exact component={HomePage} />
+            <Route path="/video/:id" component={VideoPage} />
           </Switch>
         </main>
       </div>
