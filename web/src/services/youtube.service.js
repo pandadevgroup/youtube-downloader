@@ -7,7 +7,8 @@ export function getVideoInfo(videoId) {
 function parseInfo(data) {
   let selectedEncoding = "H.264";
   return {
-    thumbnailUrl: "https://i.ytimg.com/vi/" + data.video_id + "/maxresdefault.jpg",
+    fullResThumbnailUrl: "https://i.ytimg.com/vi/" + data.video_id + "/maxresdefault.jpg",
+    thumbnailUrl: data.player_response.videoDetails.thumbnail.thumbnails[0].url,
     title: data.title,
     video_id: data.video_id,
     length_seconds: data.length_seconds,
