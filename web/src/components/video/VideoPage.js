@@ -3,6 +3,7 @@ import injectSheet from "react-jss";
 import * as YoutubeService from "../../services/youtube.service";
 import * as Utils from "../../services/utils";
 import YouTubePlayer from 'react-player/lib/players/YouTube'
+import DownloadOptions from "../download-options/DownloadOptions"
 
 const styles = {
   container: {
@@ -87,7 +88,12 @@ class VideoPage extends React.Component {
             {videoInfo.author.name}
           </a>
         </p>
-        <p className="text-secondary mb-1">Duration: {Utils.secondsToText(videoInfo.length_seconds)}</p>
+        <p className="text-secondary mb-3">Duration: {Utils.secondsToText(videoInfo.length_seconds)}</p>
+
+        <div className="mb-3">
+          <DownloadOptions videoId={videoInfo.video_id} title={videoInfo.title} />
+        </div>
+
         <p className={`mb-1 ${classes.description}`}>{videoInfo.description}</p>
         <div className={classes.playerWrapper}>
           <YouTubePlayer
