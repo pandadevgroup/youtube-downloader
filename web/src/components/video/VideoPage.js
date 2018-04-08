@@ -91,7 +91,7 @@ class VideoPage extends React.Component {
         <p className="text-secondary mb-3">Duration: {Utils.secondsToText(videoInfo.length_seconds)}</p>
 
         <div className="mb-3">
-          <DownloadOptions videoId={videoInfo.video_id} title={videoInfo.title} />
+          <DownloadOptions videoInfo={videoInfo} />
         </div>
 
         <p className={`mb-1 ${classes.description}`}>{videoInfo.description}</p>

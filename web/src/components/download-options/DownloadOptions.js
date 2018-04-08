@@ -6,9 +6,7 @@ const styles = {
     width: "100%",
     display: "flex",
     "@media (min-width: 576px)": {
-      maxWidth: "30rem",
-      margin: "0 auto",
-      justifyContent: "space-around",
+      justifyContent: "center",
       alignItems: "center"
     },
     "@media(max-width: 576px)": {
@@ -19,27 +17,49 @@ const styles = {
 };
 
 class DownloadOptions extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      quality: "22" // HD
+    };
+  }
+
   render() {
-    const { classes, videoId, title } = this.props;
+    const { classes, videoInfo } = this.props;
 
     return (
       <div className={classes.container}>
-        <div class="custom-control custom-radio my-2">
-          <input type="radio" id="hd720" name="customRadio" class="custom-control-input" checked />
-          <label class="custom-control-label" for="hd720">HD 720p (mp4)</label>
-        </div>
-        <div class="custom-control custom-radio my-2">
-          <input type="radio" id="sd360" name="customRadio" class="custom-control-input" />
-          <label class="custom-control-label" for="sd360">SD 360p (mp4)</label>
-        </div>
-        <a href={`/api/download/${videoId}`}
+        {this.getDownloadOptions(videoInfo.formats)}
+        <a href={`/api/download/${videoInfo.video_id}/${this.state.quality}`}
           target="_blank"
-          download={title}
-          class="btn btn-primary">
+          download={videoInfo.title}
+          className="btn btn-primary mx-3 my-2">
           Download
         </a>
       </div>
     );
+  }
+
+  getDownloadOptions(formats) {
+    return Object.keys(formats).map(name => {
+      const format = formats[name];
+      return (
+        <div className="custom-control custom-radio my-2 mx-3" key={format.itag}>
+          <input type="radio"
+            id={format.itag}
+            name="customRadio"
+            className="custom-control-input"
+            checked={this.state.quality === format.itag}
+            onChange={this.updateQuality(format.itag)} />
+          <label className="custom-control-label" htmlFor={format.itag}>{name}</label>
+        </div>
+      );
+    });
+  }
+
+  updateQuality = quality => event => {
+    this.setState({ quality });
   }
 }
 
