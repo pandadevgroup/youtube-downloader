@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import { Link } from "react-router-dom";
 
 const styles = {
   container: {
@@ -14,6 +15,15 @@ const styles = {
   },
   title: {
     fontSize: "1.5rem"
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none",
+    transition: "color 0.1s",
+    "&:hover": {
+      color: "#007bff",
+      textDecoration: "none"
+    }
   }
 };
 
@@ -25,9 +35,13 @@ class VideoInfo extends React.Component {
     return (
       <div className={classes.container}>
         <img src={info.thumbnailUrl} className={classes.thumbnail} />
-        <div className={classes.title}>{info.title}</div>
+        <div className={classes.title}>
+          <Link to={`/video/${info.video_id}`} className={classes.link}>
+            {info.title}
+          </Link>
+        </div>
         <div className="mb-2">
-          <a href={info.author.user_url} className="text-dark" target="_blank">
+          <a href={info.author.user_url} className={classes.link} target="_blank">
             {info.author.name}
           </a>
         </div>
