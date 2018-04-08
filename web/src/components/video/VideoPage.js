@@ -2,9 +2,36 @@ import React from "react";
 import injectSheet from "react-jss";
 import * as YoutubeService from "../../services/youtube.service";
 import * as Utils from "../../services/utils";
+import YouTubePlayer from 'react-player/lib/players/YouTube'
 
 const styles = {
-
+  container: {
+    maxWidth: "60rem",
+    margin: "2rem auto"
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none",
+    transition: "color 0.1s",
+    "&:hover": {
+      color: "#007bff",
+      textDecoration: "none"
+    }
+  },
+  description: {
+    whiteSpace: "pre-line",
+    maxHeight: "100px",
+    overflowY: "auto"
+  },
+  playerWrapper: {
+    position: "relative",
+    paddingTop: "56.25%"
+  },
+  player: {
+    position: "absolute",
+    top: 0,
+    left: 0
+  }
 };
 
 class VideoPage extends React.Component {
@@ -51,17 +78,26 @@ class VideoPage extends React.Component {
     const { videoInfo } = this.state;
 
     return videoInfo && (
-      <div>
-        <img src={videoInfo.fullResThumbnailUrl} className={classes.thumbnail} alt={videoInfo.title} />
-        <div className={classes.title}>
+      <div className={classes.container}>
+        <h1 className={`${classes.title} text-center`}>
           {videoInfo.title}
-        </div>
-        <div className="mb-2">
+        </h1>
+        <p className="mb-1">
           <a href={videoInfo.author.user_url} className={classes.link} target="_blank">
             {videoInfo.author.name}
           </a>
+        </p>
+        <p className="text-secondary mb-1">Duration: {Utils.secondsToText(videoInfo.length_seconds)}</p>
+        <p className={`mb-1 ${classes.description}`}>{videoInfo.description}</p>
+        <div className={classes.playerWrapper}>
+          <YouTubePlayer
+            url={videoInfo.video_url}
+            controls
+            youtubeConfig={{ playerVars: { showinfo: 1 } }}
+            width='100%'
+            height='100%'
+            className={classes.player} />
         </div>
-        <div className="text-secondary">Duration: {Utils.secondsToText(videoInfo.length_seconds)}</div>
       </div>
     );
   }
