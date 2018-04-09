@@ -5,7 +5,7 @@ export function getVideoInfo(videoId) {
 }
 
 export function searchVideos(query) {
-  return fetch(`/api/search/${query}`)
+  return fetch(`/api/search/${encodeURIComponent(query)}`)
     .then(response => response.json());
 }
 
