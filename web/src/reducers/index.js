@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import youtubeReducer from "./youtube.reducer";
+import youtube from "./youtube.reducer";
 
 const rootReducer = combineReducers({
-	youtubeReducer
+	youtube
 });
 
 export default rootReducer;
