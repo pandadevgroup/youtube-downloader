@@ -22,9 +22,7 @@ const styles = {
     }
   },
   description: {
-    whiteSpace: "pre-line",
-    maxHeight: "100px",
-    overflowY: "auto"
+    whiteSpace: "pre-line"
   },
   playerWrapper: {
     position: "relative",
@@ -36,12 +34,16 @@ const styles = {
     left: 0
   }
 };
-
-
                       
 class VideoPage extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      showDescription: false
+    };
+
+    this.toggleDescription = this.toggleDescription.bind(this);
   }
 
   componentDidMount() {
@@ -62,17 +64,11 @@ class VideoPage extends React.Component {
       .then(videoInfo => this.setState({ videoInfo, error: null }))
       .catch(error => this.setState({ error }));
   }
-  /* 
-  this.collapseOpen = false;
-  onCollapseClick() {
-    if (this.collapseOpen) {
-      //show collapse
-    } else {
-      //hide collapse
-    }
-    collapseOpen = !collapseOpen;
+
+  toggleDescription() {
+    this.setState(state => ({ showDescription: !state.showDescription }));
   }
-  */
+
   render() {
     const { classes, videoInfo } = this.props;
 
@@ -91,20 +87,18 @@ class VideoPage extends React.Component {
         <div className="mb-3">
           <DownloadOptions videoInfo={videoInfo} />
         </div>
-        <div className="card">
+        <div className="card mb-3">
           <div className="card-header" id="headingOne">
             <h5 className="mb-0">
-              <button onClick={/*run the commented out comment above*/} className="btn btn-link" data-toggle="collapse" data-target="#details" aria-expanded="true" aria-controls="collapse">
+              <button className="btn btn-link" onClick={this.toggleDescription}>
                 Description
               </button>
             </h5>
           </div>
 
-          <div id="details" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-            <div className="card-body">
-              {videoInfo.description.split('\n').map((item, key) => {
-                return <span key={key}>{item}<br/></span>
-              })}
+          <div className={`collapse ${this.state.showDescription ? "show" : ""}`}>
+            <div className={`${classes.description} card-body`}>
+              {videoInfo.description}
             </div>
           </div>
         </div>
