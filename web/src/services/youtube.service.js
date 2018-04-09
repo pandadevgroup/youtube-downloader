@@ -5,7 +5,8 @@ export function getVideoInfo(videoId) {
 }
 
 export function searchVideos(query) {
-  
+  return fetch(`/api/search/${query}`)
+    .then(response => response.json());
 }
 
 function parseInfo(data) {

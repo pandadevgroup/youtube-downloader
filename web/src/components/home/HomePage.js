@@ -1,9 +1,8 @@
 import React from "react";
 import injectSheet from 'react-jss'
-import * as YoutubeService from "../../services/youtube.service";
 import Search from "../search/Search";
 import VideoInfo from "../video-info/VideoInfo";
-import { getVideoInfo } from "../../actions";
+import { getVideoInfo, clearSearchResults, clearVideoInfo, searchVideos } from "../../actions";
 import { connect } from "react-redux";
 
 const styles = {
@@ -39,8 +38,11 @@ class HomePage extends React.Component {
 
     if (!videoId) {
       // User searched something
+      this.props.clearVideoInfo();
+      this.props.searchVideos(search);
     } else {
       // User entered a URL
+      this.props.clearSearchResults();
       this.props.getVideoInfo(videoId);
     }
   }
@@ -59,6 +61,12 @@ class HomePage extends React.Component {
         </h1>
         <Search onChange={this.handleChange} onSubmit={this.handleSubmit}/>
         {this.props.videoInfo && <VideoInfo info={this.props.videoInfo} />}
+        {
+          this.props.searchResults &&
+          <pre style={{ maxWidth: "100%" }}>
+            {JSON.stringify(this.props.searchResults, null, 4)}
+          </pre>
+        }
       </div>
     );
   }
@@ -67,11 +75,15 @@ class HomePage extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
 	loading: state.youtube.loading,
 	error: state.youtube.error,
-	videoInfo: state.youtube.videoInfo
+  videoInfo: state.youtube.videoInfo,
+  searchResults: state.youtube.searchResults
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	getVideoInfo: videoId => dispatch(getVideoInfo(videoId))
+  getVideoInfo: videoId => dispatch(getVideoInfo(videoId)),
+  searchVideos: query => dispatch(searchVideos(query)),
+  clearVideoInfo: _ => dispatch(clearVideoInfo()),
+  clearSearchResults: _ => dispatch(clearSearchResults())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(HomePage));
