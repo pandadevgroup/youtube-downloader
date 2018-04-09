@@ -32,6 +32,13 @@ const youtubeReducer = (state = initialState, action) => {
         error: action.message
       };
     }
+    case fromActions.CLEAR_VIDEO_INFO: {
+      return {
+        ...state,
+        videoId: null,
+        videoInfo: null
+      };
+    }
 		default: {
 			return state;
 		}

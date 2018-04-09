@@ -37,9 +37,12 @@ class HomePage extends React.Component {
     let videoId;
     if (videoIdResults != null) videoId = videoIdResults[1];
 
-    if (!videoId) return;
-
-    this.props.getVideoInfo(videoId);
+    if (!videoId) {
+      // User searched something
+    } else {
+      // User entered a URL
+      this.props.getVideoInfo(videoId);
+    }
   }
 
   handleSubmit(search) {

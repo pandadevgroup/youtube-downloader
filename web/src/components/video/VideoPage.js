@@ -4,7 +4,7 @@ import * as YoutubeService from "../../services/youtube.service";
 import * as Utils from "../../services/utils";
 import YouTubePlayer from 'react-player/lib/players/YouTube';
 import DownloadOptions from "../download-options/DownloadOptions";
-import { getVideoInfo } from "../../actions";
+import { getVideoInfo, clearVideoInfo } from "../../actions";
 import { connect } from "react-redux";
 
 const styles = {
@@ -56,6 +56,10 @@ class VideoPage extends React.Component {
     if (this.props.videoId !== prevProps.videoId && prevProps.videoId !== null) {
       prevProps.getVideoInfo(prevProps.match.params.id);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearVideoInfo();
   }
 
   getVideoInfo() {
@@ -125,7 +129,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	getVideoInfo: videoId => dispatch(getVideoInfo(videoId))
+  getVideoInfo: videoId => dispatch(getVideoInfo(videoId)),
+  clearVideoInfo: _ => dispatch(clearVideoInfo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(VideoPage));
