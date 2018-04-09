@@ -31,7 +31,6 @@ const styles = {
 class VideoInfo extends React.Component {
   render() {
     const { classes, info } = this.props;
-    console.log(info);
 
     return (
       <div className={classes.container}>
