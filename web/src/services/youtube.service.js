@@ -4,6 +4,10 @@ export function getVideoInfo(videoId) {
     .then(info => parseInfo(info));
 }
 
+export function searchVideos(query) {
+  
+}
+
 function parseInfo(data) {
   let selectedEncoding = "H.264";
   return {

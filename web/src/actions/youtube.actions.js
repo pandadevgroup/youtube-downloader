@@ -15,3 +15,21 @@ export function getVideoInfoFail(message) {
 export function clearVideoInfo() {
   return { type: CLEAR_VIDEO_INFO };
 }
+
+export const SEARCH_VIDEOS = "[Youtube] Search Videos";
+export const SEARCH_VIDEOS_SUCCESS = "[Youtube] Search Videos Success";
+export const SEARCH_VIDEOS_FAIL = "[Youtube] Search Videos Fail";
+export const CLEAR_SEARCH_RESULTS = "[Youtube] Clear Search Results";
+
+export function searchVideos(query) {
+  return { type: SEARCH_VIDEOS, query };
+}
+export function searchVideosSuccess(searchResults) {
+  return { type: SEARCH_VIDEOS_SUCCESS, searchResults };
+}
+export function searchVideosFail(message) {
+  return { type: SEARCH_VIDEOS_FAIL, message };
+}
+export function clearSearchResults() {
+  return { type: CLEAR_SEARCH_RESULTS };
+}

@@ -4,7 +4,8 @@ const initialState = {
   videoId: null,
   videoInfo: null,
   error: null,
-  loading: false
+  loading: false,
+  searchResults: null
 };
 
 const youtubeReducer = (state = initialState, action) => {
@@ -37,6 +38,34 @@ const youtubeReducer = (state = initialState, action) => {
         ...state,
         videoId: null,
         videoInfo: null
+      };
+    }
+    case fromActions.SEARCH_VIDEOS: {
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+    }
+    case fromActions.SEARCH_VIDEOS_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        searchResults: action.searchResults,
+        error: null
+      };
+    }
+    case fromActions.SEARCH_VIDEOS_FAIL: {
+      return {
+        ...state,
+        loading: false,
+        error: action.message
+      };
+    }
+    case fromActions.CLEAR_SEARCH_RESULTS: {
+      return {
+        ...state,
+        searchResults: null
       };
     }
 		default: {
