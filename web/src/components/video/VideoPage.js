@@ -2,8 +2,10 @@ import React from "react";
 import injectSheet from "react-jss";
 import * as YoutubeService from "../../services/youtube.service";
 import * as Utils from "../../services/utils";
-import YouTubePlayer from 'react-player/lib/players/YouTube'
-import DownloadOptions from "../download-options/DownloadOptions"
+import YouTubePlayer from 'react-player/lib/players/YouTube';
+import DownloadOptions from "../download-options/DownloadOptions";
+import { getVideoInfo } from "../../actions";
+import { connect } from "react-redux";
 
 const styles = {
   container: {
@@ -40,32 +42,17 @@ const styles = {
 class VideoPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    
-    this.state = {
-      videoId: props.match.params.id,
-      videoInfo: null,
-      error: null
-    };
-
-    this.getVideoInfo();
   }
 
-	static getDerivedStateFromProps(nextProps, prevState) {
-		const videoId = nextProps.match.params.id;
-		if (videoId && videoId !== prevState.videoId) {
-      // Video ID changed
-      return {
-        videoId,
-        videoInfo: null
-      };
-		}
-
-		return null;
+  componentDidMount() {
+    if (this.props.match.params.id !== this.props.videoId) {
+      this.props.getVideoInfo(this.props.match.params.id);
+    }
   }
   
 	componentDidUpdate(prevProps, prevState) {
-    if (prevState.videoInfo === null) {
-      this.getVideoInfo();
+    if (this.props.videoId !== prevProps.videoId && prevProps.videoId !== null) {
+      prevProps.getVideoInfo(prevProps.match.params.id);
     }
   }
 
@@ -87,8 +74,7 @@ class VideoPage extends React.Component {
   }
   */
   render() {
-    const { classes } = this.props;
-    const { videoInfo } = this.state;
+    const { classes, videoInfo } = this.props;
 
     return videoInfo && (
       <div className={classes.container}>
@@ -137,4 +123,15 @@ class VideoPage extends React.Component {
   }
 }
 
-export default injectSheet(styles)(VideoPage);
+const mapStateToProps = (state, ownProps) => ({
+	loading: state.youtube.loading,
+	error: state.youtube.error,
+  videoInfo: state.youtube.videoInfo,
+  videoId: state.youtube.videoId
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+	getVideoInfo: videoId => dispatch(getVideoInfo(videoId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(VideoPage));

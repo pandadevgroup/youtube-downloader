@@ -1,6 +1,7 @@
 import * as fromActions from "../actions/youtube.actions";
 
 const initialState = {
+  videoId: null,
   videoInfo: null,
   error: null,
   loading: false
@@ -12,6 +13,8 @@ const youtubeReducer = (state = initialState, action) => {
 			return {
 				...state,
         loading: true,
+        videoId: action.videoId,
+        videoInfo: null,
         error: null
 			};
     }
