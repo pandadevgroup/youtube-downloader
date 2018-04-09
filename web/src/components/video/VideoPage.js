@@ -35,6 +35,8 @@ const styles = {
   }
 };
 
+
+                      
 class VideoPage extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -60,7 +62,7 @@ class VideoPage extends React.Component {
 
 		return null;
   }
-
+  
 	componentDidUpdate(prevProps, prevState) {
     if (prevState.videoInfo === null) {
       this.getVideoInfo();
@@ -73,7 +75,17 @@ class VideoPage extends React.Component {
       .then(videoInfo => this.setState({ videoInfo, error: null }))
       .catch(error => this.setState({ error }));
   }
-  
+  /* 
+  this.collapseOpen = false;
+  onCollapseClick() {
+    if (this.collapseOpen) {
+      //show collapse
+    } else {
+      //hide collapse
+    }
+    collapseOpen = !collapseOpen;
+  }
+  */
   render() {
     const { classes } = this.props;
     const { videoInfo } = this.state;
@@ -93,8 +105,24 @@ class VideoPage extends React.Component {
         <div className="mb-3">
           <DownloadOptions videoInfo={videoInfo} />
         </div>
+        <div className="card">
+          <div className="card-header" id="headingOne">
+            <h5 className="mb-0">
+              <button onClick={/*run the commented out comment above*/} className="btn btn-link" data-toggle="collapse" data-target="#details" aria-expanded="true" aria-controls="collapse">
+                Description
+              </button>
+            </h5>
+          </div>
 
-        <p className={`mb-1 ${classes.description}`}>{videoInfo.description}</p>
+          <div id="details" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div className="card-body">
+              {videoInfo.description.split('\n').map((item, key) => {
+                return <span key={key}>{item}<br/></span>
+              })}
+            </div>
+          </div>
+        </div>
+        
         <div className={classes.playerWrapper}>
           <YouTubePlayer
             url={videoInfo.video_url}
