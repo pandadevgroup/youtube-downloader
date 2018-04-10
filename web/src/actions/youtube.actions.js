@@ -33,3 +33,17 @@ export function searchVideosFail(message) {
 export function clearSearchResults() {
   return { type: CLEAR_SEARCH_RESULTS };
 }
+
+export const DOWNLOAD_VIDEO = "[Youtube] Download Video";
+export const DOWNLOAD_VIDEO_SUCCESS = "[Youtube] Download Video Success";
+export const DOWNLOAD_VIDEO_FAIL = "[Youtube] Download Video Fail";
+
+export function downloadVideo(videoId) {
+  return { type: DOWNLOAD_VIDEO, videoId };
+}
+export function downloadVideoSuccess(videoId) {
+  return { type: DOWNLOAD_VIDEO_SUCCESS, videoId };
+}
+export function downloadVideoFail(message) {
+  return { type: DOWNLOAD_VIDEO_FAIL, message };
+}
