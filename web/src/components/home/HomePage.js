@@ -32,7 +32,7 @@ class HomePage extends React.Component {
 		let videoURLRegex = new RegExp(
 			"^(?:https?)?\\:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+?)(?:\\??&t=.*)?$"
     );
-    //last capture group to get rid of query strings
+    // last capture group to get rid of query strings
     let videoIdResults = videoURLRegex.exec(search);
     let videoId;
     if (videoIdResults != null) videoId = videoIdResults[1];
@@ -46,16 +46,6 @@ class HomePage extends React.Component {
       this.props.clearSearchResults();
       this.props.getVideoInfo(videoId);
     }
-  }
-
-  getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
   handleSubmit(search) {
