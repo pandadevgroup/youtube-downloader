@@ -7,13 +7,13 @@ let db;
 export function init() {
   db = new Dexie("YoutubeManagerDatabase");
   db.version(DB_VERSION).stores({
-    videos: "id, info, quality, blob"
+    videos: "id, info, quality, videoBlob, thumbnailBlob"
   });
 }
 
-export function addVideo(id, info, quality, blob) {
+export function addVideo(id, info, quality, videoBlob, thumbnailBlob) {
   return db.videos.add({
-    id, info, quality, blob
+    id, info, quality, videoBlob, thumbnailBlob
   });
 }
 

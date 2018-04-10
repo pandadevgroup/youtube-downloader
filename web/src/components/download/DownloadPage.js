@@ -5,7 +5,6 @@ import * as Utils from "../../services/utils";
 import DownloadOptions from "../download-options/DownloadOptions";
 import { getVideoInfo, clearVideoInfo, downloadVideo } from "../../actions";
 import { connect } from "react-redux";
-import * as storageService from "../../services/storage.service";
 
 const styles = {
   container: {

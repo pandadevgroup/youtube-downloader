@@ -3,6 +3,7 @@ const path = require('path')
 const ytdl = require('ytdl-core');
 const ytSearch = require("youtube-search");
 const ytdlHelper = require("./ytdl");
+const request = require("request");
 const PORT = process.env.PORT || 5000
 
 const searchOpts = {
@@ -45,5 +46,8 @@ express()
 				res.sendFile(download)
 			}).catch(e => res.status(500).send(e.message));
 		});
-	})
+  })
+  .get("/api/downloadThumbnail/:id", (req, res) => {
+    request(`https://i.ytimg.com/vi/${req.params.id}/maxresdefault.jpg`).pipe(res);
+  })
 	.listen(PORT, () => console.log(`Listening on ${ PORT }`))

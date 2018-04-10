@@ -33,8 +33,11 @@ function* getDownloadedVideo(action) {
 function* downloadVideo(action) {
   try {
     const { videoId, videoInfo, quality } = action;
-    const videoBlob = yield call(youtubeService.downloadVideo, videoId, quality);
-    yield call(storageService.addVideo, videoId, videoInfo, quality, videoBlob);
+    const [ videoBlob, thumbnailBlob ] = yield all([
+      call(youtubeService.downloadVideo, videoId, quality),
+      call(youtubeService.downloadThumbnail, videoInfo)
+    ]);
+    yield call(storageService.addVideo, videoId, videoInfo, quality, videoBlob, thumbnailBlob);
     yield put(youtubeActions.downloadVideoSuccess());
   } catch (e) {
     yield put(youtubeActions.downloadVideoFail(e.message));

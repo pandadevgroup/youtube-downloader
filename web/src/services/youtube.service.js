@@ -14,6 +14,11 @@ export function downloadVideo(videoId, quality) {
       .then(response => response.blob());
 }
 
+export function downloadThumbnail(videoInfo) {
+  return fetch(`/api/downloadThumbnail/${videoInfo.video_id}`)
+      .then(response => response.blob());
+}
+
 function parseInfo(data) {
   let selectedEncoding = "H.264";
   return {
