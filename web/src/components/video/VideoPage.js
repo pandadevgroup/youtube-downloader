@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import { connect } from "react-redux";
 import * as storageService from "../../services/storage.service";
+import { getDownloadedVideo } from "../../actions";
 
 const styles = {
   
@@ -38,11 +39,13 @@ class VideoPage extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	
+  loading: state.youtube.loading,
+  error: state.youtube.error,
+  video: state.youtube.downloadedVideo
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  
+  getVideo: id => dispatch(getDownloadedVideo(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(VideoPage));
