@@ -64,9 +64,11 @@ class HomePage extends React.Component {
         {this.props.videoInfo && <VideoInfo info={this.props.videoInfo} />}
         {
           this.props.searchResults &&
-          <pre style={{ maxWidth: "100%" }}>
-            {JSON.stringify(this.props.searchResults, null, 4)}
-          </pre>
+          this.props.searchResults.map(result => 
+            result.kind !== "youtube#channel"
+              ? <VideoInfo info={result} key={result.id}/>
+              : null
+          )
         }
       </div>
     );
