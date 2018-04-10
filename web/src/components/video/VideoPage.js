@@ -44,6 +44,7 @@ class VideoPage extends React.Component {
     };
 
     this.toggleDescription = this.toggleDescription.bind(this);
+    this.handleDownload = this.handleDownload.bind(this);
   }
 
   componentDidMount() {
@@ -62,15 +63,12 @@ class VideoPage extends React.Component {
     this.props.clearVideoInfo();
   }
 
-  getVideoInfo() {
-    const videoId = this.state.videoId;
-    YoutubeService.getVideoInfo(videoId)
-      .then(videoInfo => this.setState({ videoInfo, error: null }))
-      .catch(error => this.setState({ error }));
-  }
-
   toggleDescription() {
     this.setState(state => ({ showDescription: !state.showDescription }));
+  }
+
+  handleDownload(videoId, quality) {
+    console.log(`Downloading ${videoId} w/ itag ${quality}`);
   }
 
   render() {
@@ -89,7 +87,7 @@ class VideoPage extends React.Component {
         <p className="text-secondary mb-3">Duration: {Utils.secondsToText(videoInfo.length_seconds)}</p>
 
         <div className="mb-3">
-          <DownloadOptions videoInfo={videoInfo} />
+          <DownloadOptions videoInfo={videoInfo} onDownload={this.handleDownload} />
         </div>
         <div className="card mb-3">
           <div className="card-header" id="headingOne">

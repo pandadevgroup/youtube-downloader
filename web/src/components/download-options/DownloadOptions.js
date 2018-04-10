@@ -5,6 +5,7 @@ const styles = {
   container: {
     width: "100%",
     display: "flex",
+    flexWrap: "wrap",
     "@media (min-width: 576px)": {
       justifyContent: "center",
       alignItems: "center"
@@ -23,6 +24,14 @@ class DownloadOptions extends React.Component {
     this.state = {
       quality: "22" // HD
     };
+
+    this.onDownloadClick = this.onDownloadClick.bind(this);
+  }
+
+  onDownloadClick() {
+    const { quality } = this.state;
+    const videoId = this.props.videoInfo.video_id;
+    this.props.onDownload(videoId, quality);
   }
 
   render() {
@@ -31,11 +40,15 @@ class DownloadOptions extends React.Component {
     return (
       <div className={classes.container}>
         {this.getDownloadOptions(videoInfo.formats)}
-        <a href={`/api/download/${videoInfo.video_id}/${this.state.quality}`}
-          target="_blank"
-          download={videoInfo.title}
+        <button onClick={this.onDownloadClick}
           className="btn btn-primary mx-3 my-2">
           Download
+        </button>
+        <div className="w-100"></div>
+        <a href={`/api/download/${videoInfo.video_id}/${this.state.quality}`}
+          target="_blank"
+          download={videoInfo.title}>
+          Direct download link
         </a>
       </div>
     );
