@@ -29,7 +29,11 @@ class HomePage extends React.Component {
   }
 
   handleChange(search) {
-		let videoURLRegex = new RegExp(
+		
+  }
+
+  handleSubmit(search) {
+    let videoURLRegex = new RegExp(
 			"^(?:https?)?\\:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+?)(?:\\??&t=.*)?$"
     );
     // last capture group to get rid of query strings
@@ -48,15 +52,11 @@ class HomePage extends React.Component {
     }
   }
 
-  handleSubmit(search) {
-    
-  }
-
   render() {
     const { classes } = this.props;
 
     return (
-      <div className={classes.container} onSubmit={this.handleSubmit}>
+      <div className={classes.container}>
         <h1 className={classes.title}>
           Youtube Downloader
         </h1>
