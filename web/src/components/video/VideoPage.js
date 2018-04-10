@@ -53,7 +53,7 @@ class VideoPage extends React.Component {
   }
   
 	componentDidUpdate(prevProps, prevState) {
-    if (this.props.videoId !== prevProps.videoId && prevProps.videoId !== null) {
+    if (this.props.videoId !== prevProps.videoId && !this.props.loading) {
       prevProps.getVideoInfo(prevProps.match.params.id);
     }
   }
