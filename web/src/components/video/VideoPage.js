@@ -68,7 +68,9 @@ class VideoPage extends React.Component {
   }
 
   handleDownload(videoId, quality) {
-    console.log(`Downloading ${videoId} w/ itag ${quality}`);
+    fetch(`/api/download/${videoId}/${quality}`)
+      .then(response => response.blob())
+      .then(blob => console.log(blob));
   }
 
   render() {
