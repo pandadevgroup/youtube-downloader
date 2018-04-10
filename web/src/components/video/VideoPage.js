@@ -20,12 +20,11 @@ class VideoPage extends React.Component {
   componentDidMount() {
     const videoId = this.props.match.params.id;
     
-    storageService.getVideo(videoId).then(video => this.setState({ video }));
+    this.props.getVideo(videoId);
   }
 
   render() {
-    const { classes } = this.props;
-    const { video } = this.state;
+    const { classes, video } = this.props;
 
     return (
       <div>

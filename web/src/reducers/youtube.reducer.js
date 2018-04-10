@@ -104,7 +104,7 @@ const youtubeReducer = (state = initialState, action) => {
     }
     case fromActions.GET_DOWNLOADED_VIDEO_FAIL: {
       return {
-        ...satte,
+        ...state,
         loading: false,
         error: action.message
       };
