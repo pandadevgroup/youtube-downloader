@@ -38,8 +38,8 @@ export const DOWNLOAD_VIDEO = "[Youtube] Download Video";
 export const DOWNLOAD_VIDEO_SUCCESS = "[Youtube] Download Video Success";
 export const DOWNLOAD_VIDEO_FAIL = "[Youtube] Download Video Fail";
 
-export function downloadVideo(videoId) {
-  return { type: DOWNLOAD_VIDEO, videoId };
+export function downloadVideo(id) {
+  return { type: DOWNLOAD_VIDEO, id };
 }
 export function downloadVideoSuccess() {
   return { type: DOWNLOAD_VIDEO_SUCCESS };
