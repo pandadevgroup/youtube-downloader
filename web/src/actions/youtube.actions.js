@@ -41,9 +41,23 @@ export const DOWNLOAD_VIDEO_FAIL = "[Youtube] Download Video Fail";
 export function downloadVideo(videoId) {
   return { type: DOWNLOAD_VIDEO, videoId };
 }
-export function downloadVideoSuccess(videoId) {
-  return { type: DOWNLOAD_VIDEO_SUCCESS, videoId };
+export function downloadVideoSuccess() {
+  return { type: DOWNLOAD_VIDEO_SUCCESS };
 }
 export function downloadVideoFail(message) {
   return { type: DOWNLOAD_VIDEO_FAIL, message };
+}
+
+export const GET_DOWNLOADED_VIDEO = "[Youtube] Get Downloaded Video";
+export const GET_DOWNLOADED_VIDEO_SUCCESS = "[Youtube] Get Downloaded Video Success";
+export const GET_DOWNLOADED_VIDEO_FAIL = "[Youtube] Get Downloaded Video Fail";
+
+export function getVideo(id) {
+  return { type: GET_DOWNLOADED_VIDEO, id };
+}
+export function getVideoSuccess(video) {
+  return { type: GET_DOWNLOADED_VIDEO_SUCCESS, video };
+}
+export function getVideoFail(message) {
+  return { type: GET_DOWNLOADED_VIDEO_FAIL, message };
 }

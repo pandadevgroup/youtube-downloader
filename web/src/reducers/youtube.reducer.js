@@ -5,7 +5,8 @@ const initialState = {
   videoInfo: null,
   error: null,
   loading: false,
-  searchResults: null
+  searchResults: null,
+  downloadedVideo: null
 };
 
 const youtubeReducer = (state = initialState, action) => {
@@ -66,6 +67,46 @@ const youtubeReducer = (state = initialState, action) => {
       return {
         ...state,
         searchResults: null
+      };
+    }
+    case fromActions.DOWNLOAD_VIDEO: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+    case fromActions.DOWNLOAD_VIDEO_SUCCESS: {
+      return {
+        ...state,
+        loading: false
+      };
+    }
+    case fromActions.DOWNLOAD_VIDEO_FAIL: {
+      return {
+        ...state,
+        loading: false,
+        error: action.message
+      };
+    }
+    case fromActions.GET_DOWNLOADED_VIDEO: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+    case fromActions.GET_DOWNLOADED_VIDEO_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        downloadedVideo: action.video
+      };
+    }
+    case fromActions.GET_DOWNLOADED_VIDEO_FAIL: {
+      return {
+        ...satte,
+        loading: false,
+        error: action.message
       };
     }
 		default: {
