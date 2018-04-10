@@ -28,7 +28,7 @@ const styles = {
   }
 };
 
-class VideoInfo extends React.Component {
+class VideoListItem extends React.Component {
   render() {
     const { classes, info } = this.props;
 
@@ -36,7 +36,7 @@ class VideoInfo extends React.Component {
       <div className={classes.container}>
         <img src={info.thumbnailUrl || info.thumbnails.default.url} className={classes.thumbnail} alt={info.title} />
         <div className={classes.title}>
-          <Link to={`/video/${info.video_id || info.id}`} className={classes.link}>
+          <Link to={`/download/${info.video_id || info.id}`} className={classes.link}>
             {info.title}
           </Link>
         </div>
@@ -57,4 +57,4 @@ class VideoInfo extends React.Component {
   }
 }
 
-export default injectSheet(styles)(VideoInfo);
+export default injectSheet(styles)(VideoListItem);

@@ -1,9 +1,9 @@
 import React from "react";
 import injectSheet from 'react-jss'
 import Search from "../search/Search";
-import VideoInfo from "../video-info/VideoInfo";
 import { getVideoInfo, clearSearchResults, clearVideoInfo, searchVideos } from "../../actions";
 import { connect } from "react-redux";
+import VideoListItem from "../video-list-item/VideoListItem";
 
 const styles = {
   container: {
@@ -65,12 +65,12 @@ class HomePage extends React.Component {
           Youtube Downloader
         </h1>
         <Search onChange={this.handleChange} onSubmit={this.handleSubmit}/>
-        {this.props.videoInfo && <VideoInfo info={this.props.videoInfo} />}
+        {this.props.videoInfo && <VideoListItem info={this.props.videoInfo} />}
         {
           this.props.searchResults &&
           this.props.searchResults.map(result => 
             result.kind !== "youtube#channel"
-              ? <VideoInfo info={result} key={result.id}/>
+              ? <VideoListItem info={result} key={result.id}/>
               : null
           )
         }
