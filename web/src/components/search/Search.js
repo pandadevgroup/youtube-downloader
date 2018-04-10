@@ -42,7 +42,7 @@ class Search extends React.Component {
         <div className="input-group">
           <DebounceInput
             minLength={2}
-            debounceTimeout={150}
+            debounceTimeout={400}
             type="text"
             className="form-control"
             value={this.state.search}
