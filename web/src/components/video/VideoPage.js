@@ -1,7 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
 import { connect } from "react-redux";
-import Dexie from "dexie";
+import * as storageService from "../../services/storage.service";
 
 const styles = {
   
@@ -18,15 +18,8 @@ class VideoPage extends React.Component {
 
   componentDidMount() {
     const videoId = this.props.match.params.id;
-    let db = new Dexie("YoutubeManagerDatabase");
-    db.version(1).stores({
-      videos: "videoId, videoInfo, videoBlob"
-    });
-    db.videos.get(videoId).then(video => {
-      this.setState({
-        video
-      });
-    });
+    
+    storageService.getVideo(videoId).then(video => this.setState({ video }));
   }
 
   render() {

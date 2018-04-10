@@ -5,7 +5,7 @@ import * as Utils from "../../services/utils";
 import DownloadOptions from "../download-options/DownloadOptions";
 import { getVideoInfo, clearVideoInfo } from "../../actions";
 import { connect } from "react-redux";
-import Dexie from "dexie";
+import * as storageService from "../../services/storage.service";
 
 const styles = {
   container: {
@@ -70,15 +70,10 @@ class DownloadPage extends React.Component {
   handleDownload(videoInfo, quality) {
     const videoId = videoInfo.video_id;
 
-    let db = new Dexie("YoutubeManagerDatabase");
-    db.version(1).stores({
-      videos: "videoId, videoInfo, videoBlob"
-    });
-
     fetch(`/api/download/${videoId}/${quality}`)
       .then(response => response.blob())
       .then(videoBlob => {
-        db.videos.add({
+        storageService.addVideo({
           videoId, videoInfo, videoBlob
         });
       });
