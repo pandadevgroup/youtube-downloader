@@ -74,13 +74,19 @@ class DownloadPage extends React.Component {
   }
 
   render() {
-    const { classes, videoInfo, downloading } = this.props;
+    const { classes, videoInfo, downloading, error } = this.props;
 
     return videoInfo && (
       <div className={classes.container}>
-        <h1 className={`${classes.title} text-center`}>
+        <h1 className={`${classes.title} text-center mb-3`}>
           {videoInfo.title}
         </h1>
+        {
+          error &&
+          <div className="alert alert-danger" role="alert">
+            Error: {error}
+          </div>
+        }
         <p className="mb-1">
           <a href={videoInfo.author.user_url} className={classes.link} target="_blank">
             {videoInfo.author.name}
