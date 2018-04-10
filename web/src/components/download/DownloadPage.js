@@ -73,9 +73,7 @@ class DownloadPage extends React.Component {
     fetch(`/api/download/${videoId}/${quality}`)
       .then(response => response.blob())
       .then(videoBlob => {
-        storageService.addVideo({
-          videoId, videoInfo, videoBlob
-        });
+        storageService.addVideo(videoId, videoInfo, videoBlob);
       });
   }
 
