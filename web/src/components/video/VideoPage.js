@@ -111,7 +111,7 @@ class VideoPage extends React.Component {
           <YouTubePlayer
             url={videoInfo.video_url}
             controls
-            youtubeConfig={{ playerVars: { showinfo: 1 } }}
+            youtubeConfig={{ playerVars: { showinfo: 1, modestbranding: 0 } }}
             width='100%'
             height='100%'
             className={classes.player} />
