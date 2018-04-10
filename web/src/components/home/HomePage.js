@@ -52,6 +52,10 @@ class HomePage extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearSearchResults();
+  }
+
   render() {
     const { classes } = this.props;
 
