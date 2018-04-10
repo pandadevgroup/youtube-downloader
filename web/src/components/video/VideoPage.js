@@ -30,7 +30,7 @@ class VideoPage extends React.Component {
       <div>
         {
           video &&
-          <video src={window.URL.createObjectURL(video.videoBlob)} controls />
+          <video src={window.URL.createObjectURL(video.blob)} controls />
         }
       </div>
     );
