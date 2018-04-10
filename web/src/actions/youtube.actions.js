@@ -38,8 +38,8 @@ export const DOWNLOAD_VIDEO = "[Youtube] Download Video";
 export const DOWNLOAD_VIDEO_SUCCESS = "[Youtube] Download Video Success";
 export const DOWNLOAD_VIDEO_FAIL = "[Youtube] Download Video Fail";
 
-export function downloadVideo(id) {
-  return { type: DOWNLOAD_VIDEO, id };
+export function downloadVideo(videoId, quality, videoInfo) {
+  return { type: DOWNLOAD_VIDEO, videoId, quality, videoInfo };
 }
 export function downloadVideoSuccess() {
   return { type: DOWNLOAD_VIDEO_SUCCESS };
@@ -52,12 +52,12 @@ export const GET_DOWNLOADED_VIDEO = "[Youtube] Get Downloaded Video";
 export const GET_DOWNLOADED_VIDEO_SUCCESS = "[Youtube] Get Downloaded Video Success";
 export const GET_DOWNLOADED_VIDEO_FAIL = "[Youtube] Get Downloaded Video Fail";
 
-export function getVideo(id) {
-  return { type: GET_DOWNLOADED_VIDEO, id };
+export function getDownloadedVideo(videoId) {
+  return { type: GET_DOWNLOADED_VIDEO, videoId };
 }
-export function getVideoSuccess(video) {
+export function getDownloadedVideoSuccess(video) {
   return { type: GET_DOWNLOADED_VIDEO_SUCCESS, video };
 }
-export function getVideoFail(message) {
+export function getDownloadedVideoFail(message) {
   return { type: GET_DOWNLOADED_VIDEO_FAIL, message };
 }

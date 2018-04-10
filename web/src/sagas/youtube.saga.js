@@ -23,19 +23,21 @@ function* searchVideos(action) {
 
 function* getDownloadedVideo(action) {
   try {
-    const video = yield call(storageService.getVideo, action.id);
-    yield put(youtubeActions.searchVideosSuccess(video));
+    const video = yield call(storageService.getVideo, action.videoId);
+    yield put(youtubeActions.getDownloadedVideoSuccess(video));
   } catch (e) {
-    yield put(youtubeActions.searchVideosFail(e.message));
+    yield put(youtubeActions.getDownloadedVideoFail(e.message));
   }
 }
 
 function* downloadVideo(action) {
   try {
-    yield call(youtubeService.downloadVideo, action.id);
-    yield put(youtubeActions.searchVideosSuccess());
+    const { videoId, videoInfo, quality } = action;
+    const videoBlob = yield call(youtubeService.downloadVideo, videoId, quality);
+    yield call(storageService.addVideo, videoId, videoInfo, quality, videoBlob);
+    yield put(youtubeActions.downloadVideoSuccess());
   } catch (e) {
-    yield put(youtubeActions.searchVideosFail(e.message));
+    yield put(youtubeActions.downloadVideoFail(e.message));
   }
 }
 

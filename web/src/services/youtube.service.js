@@ -9,6 +9,11 @@ export function searchVideos(query) {
     .then(response => response.json());
 }
 
+export function downloadVideo(videoId, quality) {
+  return fetch(`/api/download/${videoId}/${quality}`)
+      .then(response => response.blob());
+}
+
 function parseInfo(data) {
   let selectedEncoding = "H.264";
   return {
