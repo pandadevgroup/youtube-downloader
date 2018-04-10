@@ -30,8 +30,9 @@ class HomePage extends React.Component {
 
   handleChange(search) {
 		let videoURLRegex = new RegExp(
-			"^(?:https?)?:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+)$"
-		);
+			"^(?:https?)?:\\/\\/(?:www\\.)?(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)(.+)(?:\\?.+)$"
+    );
+    //last capture group to get rid of query strings
     let videoIdResults = videoURLRegex.exec(search);
     let videoId;
     if (videoIdResults != null) videoId = videoIdResults[1];
