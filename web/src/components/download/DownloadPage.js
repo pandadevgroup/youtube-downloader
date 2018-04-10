@@ -74,7 +74,7 @@ class DownloadPage extends React.Component {
   }
 
   render() {
-    const { classes, videoInfo } = this.props;
+    const { classes, videoInfo, downloading } = this.props;
 
     return videoInfo && (
       <div className={classes.container}>
@@ -89,7 +89,7 @@ class DownloadPage extends React.Component {
         <p className="text-secondary mb-3">Duration: {Utils.secondsToText(videoInfo.length_seconds)}</p>
 
         <div className="mb-3">
-          <DownloadOptions videoInfo={videoInfo} onDownload={this.handleDownload} />
+          <DownloadOptions videoInfo={videoInfo} onDownload={this.handleDownload} downloading={downloading} />
         </div>
         <div className="card mb-3">
           <div className="card-header" id="headingOne">
@@ -123,6 +123,7 @@ class DownloadPage extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
 	loading: state.youtube.loading,
+	downloading: state.youtube.downloading,
 	error: state.youtube.error,
   videoInfo: state.youtube.videoInfo,
   videoId: state.youtube.videoId

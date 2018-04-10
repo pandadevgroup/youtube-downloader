@@ -33,14 +33,15 @@ class DownloadOptions extends React.Component {
   }
 
   render() {
-    const { classes, videoInfo } = this.props;
+    const { classes, videoInfo, downloading } = this.props;
 
     return (
       <div className={classes.container}>
         {this.getDownloadOptions(videoInfo.formats)}
         <button onClick={this.onDownloadClick}
-          className="btn btn-primary mx-3 my-2">
-          Download
+          className="btn btn-primary mx-3 my-2"
+          disabled={downloading}>
+          {downloading ? "Downloading..." : "Download"}
         </button>
         <div className="w-100"></div>
         <a href={`/api/download/${videoInfo.video_id}/${this.state.quality}`}

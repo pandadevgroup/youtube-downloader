@@ -5,6 +5,7 @@ const initialState = {
   videoInfo: null,
   error: null,
   loading: false,
+  downloading: false,
   searchResults: null,
   downloadedVideo: null
 };
@@ -72,19 +73,19 @@ const youtubeReducer = (state = initialState, action) => {
     case fromActions.DOWNLOAD_VIDEO: {
       return {
         ...state,
-        loading: true
+        downloading: true
       };
     }
     case fromActions.DOWNLOAD_VIDEO_SUCCESS: {
       return {
         ...state,
-        loading: false
+        downloading: false
       };
     }
     case fromActions.DOWNLOAD_VIDEO_FAIL: {
       return {
         ...state,
-        loading: false,
+        downloading: false,
         error: action.message
       };
     }
