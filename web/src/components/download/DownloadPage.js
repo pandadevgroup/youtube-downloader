@@ -3,7 +3,7 @@ import injectSheet from "react-jss";
 import YouTubePlayer from "react-player/lib/players/YouTube";
 import * as Utils from "../../services/utils";
 import DownloadOptions from "../download-options/DownloadOptions";
-import { getVideoInfo, clearVideoInfo } from "../../actions";
+import { getVideoInfo, clearVideoInfo, downloadVideo } from "../../actions";
 import { connect } from "react-redux";
 import * as storageService from "../../services/storage.service";
 
@@ -70,11 +70,7 @@ class DownloadPage extends React.Component {
   handleDownload(videoInfo, quality) {
     const videoId = videoInfo.video_id;
 
-    fetch(`/api/download/${videoId}/${quality}`)
-      .then(response => response.blob())
-      .then(videoBlob => {
-        storageService.addVideo(videoId, videoInfo, videoBlob);
-      });
+    this.props.downloadVideo(videoId, quality, videoInfo);
   }
 
   render() {
@@ -134,7 +130,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getVideoInfo: videoId => dispatch(getVideoInfo(videoId)),
-  clearVideoInfo: _ => dispatch(clearVideoInfo())
+  clearVideoInfo: _ => dispatch(clearVideoInfo()),
+  downloadVideo: (videoId, quality, videoInfo) => dispatch(downloadVideo(videoId, quality, videoInfo))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(DownloadPage));
