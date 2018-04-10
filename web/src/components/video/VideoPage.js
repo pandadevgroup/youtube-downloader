@@ -6,6 +6,7 @@ import YouTubePlayer from 'react-player/lib/players/YouTube';
 import DownloadOptions from "../download-options/DownloadOptions";
 import { getVideoInfo, clearVideoInfo } from "../../actions";
 import { connect } from "react-redux";
+import Dexie from "dexie";
 
 const styles = {
   container: {
@@ -67,10 +68,21 @@ class VideoPage extends React.Component {
     this.setState(state => ({ showDescription: !state.showDescription }));
   }
 
-  handleDownload(videoId, quality) {
+  handleDownload(videoInfo, quality) {
+    const videoId = videoInfo.video_id;
+
+    let db = new Dexie("YoutubeManagerDatabase");
+    db.version(1).stores({
+      videos: "videoId, videoInfo, videoBlob"
+    });
+
     fetch(`/api/download/${videoId}/${quality}`)
       .then(response => response.blob())
-      .then(blob => console.log(blob));
+      .then(videoBlob => {
+        db.videos.add({
+          videoId, videoInfo, videoBlob
+        });
+      });
   }
 
   render() {

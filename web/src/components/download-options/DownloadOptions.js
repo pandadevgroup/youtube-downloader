@@ -29,9 +29,7 @@ class DownloadOptions extends React.Component {
   }
 
   onDownloadClick() {
-    const { quality } = this.state;
-    const videoId = this.props.videoInfo.video_id;
-    this.props.onDownload(videoId, quality);
+    this.props.onDownload(this.props.videoInfo, this.state.quality);
   }
 
   render() {
