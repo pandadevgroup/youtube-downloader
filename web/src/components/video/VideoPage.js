@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import { connect } from "react-redux";
 import { getDownloadedVideo } from "../../actions";
+import VideoPlayer from "../video-player/VideoPlayer";
 
 const styles = {
   
@@ -29,7 +30,9 @@ class VideoPage extends React.Component {
       <div>
         {
           video &&
-          <video src={window.URL.createObjectURL(video.videoBlob)} controls />
+          <VideoPlayer
+            poster={window.URL.createObjectURL(video.thumbnailBlob)}
+            src={window.URL.createObjectURL(video.videoBlob)} />
         }
       </div>
     );
