@@ -55,7 +55,7 @@ function parseFormats(fmt_list, formats, selectedEncoding) {
   }
 
   // TEMPORARY AUDIO SOLUTION
-  // parsed["Audio Only (m4a)"] = getFormatFromTag("140", formats);
+  parsed["Audio Only (m4a)"] = getFormatFromTag("140", formats);
 
   return parsed;
 }
