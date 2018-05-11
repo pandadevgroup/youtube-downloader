@@ -34,6 +34,7 @@ class DownloadOptions extends React.Component {
 
   render() {
     const { classes, videoInfo, downloading } = this.props;
+    console.log(videoInfo);
 
     return (
       <div className={classes.container}>
@@ -43,6 +44,8 @@ class DownloadOptions extends React.Component {
           disabled={downloading}>
           {downloading ? "Downloading..." : "Download"}
         </button>
+        <div className="w-100"></div>
+        <span>Streaming Links: </span> {this.getStreamingOptions(videoInfo.formats)}
         <div className="w-100"></div>
         <a href={`/api/download/${videoInfo.video_id}/${this.state.quality}`}
           target="_blank"
@@ -66,6 +69,17 @@ class DownloadOptions extends React.Component {
             onChange={this.updateQuality(format.itag)} />
           <label className="custom-control-label" htmlFor={format.itag}>{name}</label>
         </div>
+      );
+    });
+  }
+
+  getStreamingOptions(formats) {
+    return Object.keys(formats).map(name => {
+      const format = formats[name];
+      return (
+        <a className="my-2 mx-3" key={format.itag} href={format.url} target="_blank">
+          {name}
+        </a>
       );
     });
   }
